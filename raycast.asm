@@ -27,59 +27,59 @@ extern Sleep
 extern WriteConsoleOutputCharacterW
 
 section .bss
-    linebuf resb 16
-    setting         resb 1
-    whichBullet     resd 1
-    x               resd 1
-    y               resd 1
-    tile            resb 1
-    changeHardness  resd 1
-    holdingChar     resb 1
+    linebuf             resb 16
+    setting             resb 1
+    whichBullet         resd 1
+    x                   resd 1
+    y                   resd 1
+    tile                resb 1
+    changeHardness      resd 1
+    holdingChar         resb 1
 
 
 section .data
 
 ; Constants
-STD_OUTPUT_HANDLE    equ -11
-SCREEN_WIDTH        equ 209
-SCREEN_HEIGHT       equ 51
-MAP_WIDTH           equ 32
-MAP_HEIGHT          equ 16
-DEPTH               dd 16.0
-FOV                 dd 1.0471976       ; 60 degrees in radians approx
+STD_OUTPUT_HANDLE       equ -11
+SCREEN_WIDTH            equ 209
+SCREEN_HEIGHT           equ 51
+MAP_WIDTH               equ 32
+MAP_HEIGHT              equ 16
+DEPTH                   dd 16.0
+FOV                     dd 1.0471976       ; 60 degrees in radians approx
 
 ; Strings
-prompt              db "Are you ready to start? Y/n - ", 0
-str_caret           db "^", 0
-str_line1_bow       db "____|____", 0
-str_line2_bow       db "/    |    \", 0
-str_line3_bow       db "/_____|_____\", 0
-str_pipe            db "|", 0
-str_slash_pipe      db "/|\", 0
-str_line1_justbow   db "____ ____", 0
-str_line2_justbow   db "/         \", 0
-str_line3_justbow   db "/_____ _____\", 0
-str_space           db " ", 0
-str_spaces3         db "   ", 0
-clsStr              db "cls", 0
+prompt                  db "Are you ready to start? Y/n - ", 0
+str_caret               db "^", 0
+str_line1_bow           db "____|____", 0
+str_line2_bow           db "/    |    \", 0
+str_line3_bow           db "/_____|_____\", 0
+str_pipe                db "|", 0
+str_slash_pipe          db "/|\", 0
+str_line1_justbow       db "____ ____", 0
+str_line2_justbow       db "/         \", 0
+str_line3_justbow       db "/_____ _____\", 0
+str_space               db " ", 0
+str_spaces3             db "   ", 0
+clsStr                  db "cls", 0
 
-titleText           db "SETTING", 0
-bullet1             db "- 1) change input type", 0
-bullet2             db "- 2) change hardness", 0
-bullet3             db "- 3) edit map", 0
-bullet4             db "- 4) leave setting", 0
+titleText               db "SETTING", 0
+bullet1                 db "- 1) change input type", 0
+bullet2                 db "- 2) change hardness", 0
+bullet3                 db "- 3) edit map", 0
+bullet4                 db "- 4) leave setting", 0
 
-promptInput         db "%i", 0
-promptX             db "enter x (0-%d): ", 10, 0
-promptY             db "enter y (0-%d): ", 10, 0
-promptTile          db "enter tile char (e.g. 0 or 1): ", 10, 0
-updateText          db "map updated at %d,%d", 10, 0
-invalidCoords       db "invalid coords", 10, 0
-pressEnter          db "press enter to continue...", 10, 0
-hardnessPrompt      db "change hardness to [easy (1-10) hard] - ", 0
-changePrompt        db "What do you want to change it to? - ", 0
+promptInput             db "%i", 0
+promptX                 db "enter x (0-%d): ", 10, 0
+promptY                 db "enter y (0-%d): ", 10, 0
+promptTile              db "enter tile char (e.g. 0 or 1): ", 10, 0
+updateText              db "map updated at %d,%d", 10, 0
+invalidCoords           db "invalid coords", 10, 0
+pressEnter              db "press enter to continue...", 10, 0
+hardnessPrompt          db "change hardness to [easy (1-10) hard] - ", 0
+changePrompt            db "What do you want to change it to? - ", 0
 
-format_char         db "%c", 0
+format_char             db "%c", 0
 
 ; Map (32x16 chars)
 map db \
@@ -101,25 +101,25 @@ map db \
 "11111111111111111111111111111111"
 
 ; Floating-point constants
-float_0_1           dd 0x3dcccccd    ; 0.1f
-float_0_25          dd 0.25
-float_0_5           dd 0x3f000000    ; 0.5f
-float_0_75          dd 0.75
-float_0_9           dd 0.9
-float_1_0           dd 0x3f800000    ; 1.0f
-float_2_0           dd 0x40000000    ; 2.0f
-float_SCREEN_WIDTH  dd SCREEN_WIDTH
-float_SCREEN_HEIGHT dd SCREEN_HEIGHT
-float_SCREEN_HEIGHT_half dd 25.5
-half_FOV            dd 0.5235987756  ; FOV/2 = 30 degrees in radians approx
-FOV_float           dd FOV
-float_depth         dd DEPTH
-float_depth_div_4   dd 4.0
-float_depth_div_3   dd 5.3333333
-float_depth_div_2   dd 8.0
+float_0_1                   dd 0x3dcccccd    ; 0.1f
+float_0_25                  dd 0.25
+float_0_5                   dd 0x3f000000    ; 0.5f
+float_0_75                  dd 0.75
+float_0_9                   dd 0.9
+float_1_0                   dd 0x3f800000    ; 1.0f
+float_2_0                   dd 0x40000000    ; 2.0f
+float_SCREEN_WIDTH          dd SCREEN_WIDTH
+float_SCREEN_HEIGHT         dd SCREEN_HEIGHT
+float_SCREEN_HEIGHT_half    dd 25.5
+half_FOV                    dd 0.5235987756  ; FOV/2 = 30 degrees in radians approx
+FOV_float                   dd FOV
+float_depth                 dd DEPTH
+float_depth_div_4           dd 4.0
+float_depth_div_3           dd 5.3333333
+float_depth_div_2           dd 8.0
 
 ; Buffers and vars
-buffer_coord        dw 0,0
+buffer_coord                dw 0,0
 
 ; Format strings for sprintf in drawWeapon_norm
 fmt1                db "[%c%c|%c%c]", 0
