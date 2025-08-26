@@ -145,7 +145,6 @@ section .text
 global _start
 
 _start:
-
     ; --- print prompt ---
     sub rsp, 40
     lea rcx, [rel prompt]
@@ -570,11 +569,6 @@ exit_process:
     call ExitProcess
 
 
-
-
-
-
-
 openMenu:
     push rbp
     mov rbp, rsp
@@ -772,10 +766,6 @@ newline:
     ret
 
 
-
-
-
-
 halfwaybullets:
     push rbp
     mov rbp, rsp
@@ -794,8 +784,6 @@ halfwaybullets:
 .done:
     pop rbp
     ret
-
-
 
 
 moveXY:
