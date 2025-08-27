@@ -1,13 +1,10 @@
-; extern declarations for linking with C library & Windows API
+; extern declarations for linking with C lib & windows API
 extern GetStdHandle
 extern SetConsoleCursorPosition
 extern printf
 extern sprintf       ; from C stdlib
 extern system, scanf, getchar
 extern map
-
-
-
 extern malloc
 extern free
 extern srand
@@ -19,12 +16,12 @@ extern fabsf
 extern sqrtf
 extern _kbhit
 extern _getch
-
-
 extern SetConsoleScreenBufferSize
 extern SetConsoleActiveScreenBuffer
 extern Sleep
 extern WriteConsoleOutputCharacterW
+
+
 
 section .bss
     linebuf             resb 16
