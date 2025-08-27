@@ -26,7 +26,7 @@ This is a simple first-person raycasting engine written in C, running entirely i
 | Move Backward | `S`       |
 | Turn Left     | `A`       |
 | Turn Right    | `D`       |
-| Fire Weapon   | `Spacebar` (not implemented yet) |
+| Fire Weapon   | `Spacebar` (not implemented yet; just allows you to fire with a animation) |
 | Open Menu     | `M`       |
 
 These can be changed in-game using the menu.
