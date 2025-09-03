@@ -35,7 +35,7 @@ char map[] =
 #define SCREEN_HEIGHT 40
 
 // so bool works
-#define bool int
+#define bool unsigned char
 #define true 1
 #define false 0
 
@@ -60,15 +60,22 @@ struct Enemy {
 // helper function
 struct Enemy spawnEnemy() {
     struct Enemy e;
+    
+
+    // Enemy pos
     e.xCords = rand() % 32;
     e.yCords = rand() % 16;
-    e.health = 10;
+    
+    
+    e.health = (rand() % 10) + 5;   // at least 5 but upto 15
     return e;
 };
 
 //for the player to fire there weapon
 void fireWeapon () {
-
+    /*
+    cast a ray and if it intersects with a enemy then take away some of the enemies health
+    */
 }
 
 void halfwaybullets () {
